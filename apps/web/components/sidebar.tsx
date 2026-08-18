@@ -8,6 +8,7 @@ import {
   IconLayoutDashboard,
   IconTrendingUp,
   IconBook2,
+  IconCalendar,
   IconUserCircle,
   IconChevronRight,
   IconLogout,
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: IconLayoutDashboard },
   { label: "Trades", href: "/trades", icon: IconTrendingUp },
   { label: "Journal", href: "/journal", icon: IconBook2 },
+  { label: "Calendar", href: "/calendar", icon: IconCalendar },
   { label: "Account", href: "/account", icon: IconUserCircle },
 ]
 
