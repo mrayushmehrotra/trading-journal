@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
@@ -41,7 +42,6 @@ export function Sidebar() {
   const handleLogout = async () => {
     try {
       await authClient.signOut()
-      router.push("/sign-in")
       router.refresh()
     } catch (error) {
       console.error("Logout failed:", error)
@@ -57,7 +57,7 @@ export function Sidebar() {
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <motion.div
-          className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#22C55E]/20"
+          className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[#22C55E]/30 bg-[#0D1B2A] shadow-sm"
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{
@@ -67,7 +67,13 @@ export function Sidebar() {
             delay: 0.1,
           }}
         >
-          <IconTrendingUp size={20} className="text-[#22C55E]" stroke={1.8} />
+          <Image
+            src="/icon.png"
+            alt="TradeJournal Logo"
+            width={32}
+            height={32}
+            className="h-full w-full object-cover"
+          />
         </motion.div>
         <div>
           <p className="text-sm leading-none font-bold text-white">TradeJournal</p>

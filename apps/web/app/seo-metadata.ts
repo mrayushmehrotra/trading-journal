@@ -16,7 +16,8 @@ export const siteUrl = resolveSiteUrl()
 export const metadataBase = new URL(siteUrl)
 
 export const companyName = "TradeJournal"
-export const shortName = "TradeJournal"
+export const shortName = "Trade.side"
+
 export const siteDescription =
   "TradeJournal — free trading journal for Indian stock market investors. Track your daily P&L, log NIFTY, NSE & BSE trades, and reflect on your trading mindset. Built for intraday traders, F&O traders, and long-term investors."
 
@@ -112,6 +113,15 @@ export const baseMetadata: Metadata = {
     },
   },
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-192x192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512x512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth/server"
@@ -15,6 +16,7 @@ import {
   IconArrowRight,
   IconTarget,
   IconClock,
+  IconArrowUpRight,
 } from "@tabler/icons-react"
 
 export const dynamic = "force-dynamic"
@@ -102,107 +104,128 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="bg-[#0D1B2A]">
-      <nav
-        aria-label="Main navigation"
-        className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0D1B2A]/80 backdrop-blur"
-      >
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#22C55E]/20">
-              <IconTrendingUp size={20} className="text-[#22C55E]" stroke={1.8} />
+    <main className="bg-[#F4F5F7] text-[#0F172A] min-h-screen">
+      {/* StackSide Inspired Top Navigation Bar */}
+      <header className="fixed inset-x-0 top-0 z-50 py-4 px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between">
+          {/* Brand Logo & Name */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-gray-300/60 bg-white shadow-sm transition-transform group-hover:scale-105">
+              <Image
+                src="/icon.png"
+                alt="TradeJournal Logo"
+                width={36}
+                height={36}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <span className="text-base font-semibold tracking-tight text-[#0F172A]">
+              Trade.Side <span className="text-xs text-[#64748B] font-normal">Journal</span>
             </span>
-            <span className="text-sm font-bold text-white">TradeJournal</span>
           </Link>
 
-          <div className="hidden items-center gap-8 text-sm text-[#B8C4CC] md:flex">
-            <a href="#features" className="transition-colors hover:text-white">
-              Features
+          {/* Center Floating Pill Navbar */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden md:flex items-center gap-4 rounded-full bg-white/90 backdrop-blur-md px-6 py-2 border border-gray-200/80 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.04)] text-xs sm:text-sm font-medium text-[#475569]"
+          >
+            <a href="#hero" className="transition-colors hover:text-[#0F172A]">
+              Home
             </a>
-            <a href="#why" className="transition-colors hover:text-white">
-              Why journal
+            <span className="text-gray-300">·</span>
+            <a href="#features" className="transition-colors hover:text-[#0F172A]">
+              Services
             </a>
-            <a href="#faq" className="transition-colors hover:text-white">
-              FAQ
+            <span className="text-gray-300">·</span>
+            <a href="#why" className="transition-colors hover:text-[#0F172A]">
+              Why Journal
             </a>
-          </div>
+            <span className="text-gray-300">·</span>
+            <a href="#faq" className="transition-colors hover:text-[#0F172A]">
+              About
+            </a>
+          </nav>
 
+          {/* Right Action Button */}
           <div className="flex items-center gap-3">
-            <Button
-              asChild
-              variant="ghost"
-              className="text-white hover:bg-white/10 hover:text-white"
+            <Link
+              href="/auth/sign-in"
+              className="hidden sm:inline-flex text-xs sm:text-sm font-medium text-[#475569] hover:text-[#0F172A] px-3 py-2 transition"
             >
-              <Link href="/auth/sign-in">Sign in</Link>
-            </Button>
-            <Button asChild size="sm" className="bg-[#22C55E] text-white hover:bg-[#16A34A]">
-              <Link href="/auth/sign-up">Get started free</Link>
-            </Button>
+              Sign in
+            </Link>
+            <Link
+              href="/auth/sign-up"
+              className="inline-flex items-center gap-1.5 bg-[#00E575] hover:bg-[#00D66C] text-[#0F172A] text-xs sm:text-sm font-semibold rounded-full px-5 py-2.5 shadow-md shadow-[#00E575]/20 transition-all hover:scale-[1.02] active:scale-95"
+            >
+              <span>Get Started</span>
+              <IconArrowUpRight size={16} stroke={2.5} />
+            </Link>
           </div>
         </div>
-      </nav>
+      </header>
 
+      {/* Hero Section */}
       <LandingHero />
 
-      <section id="features" aria-labelledby="features-heading" className="bg-[#F5F7FA] py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2
-            id="features-heading"
-            className="text-center text-3xl font-bold text-[#1A202C] sm:text-4xl"
-          >
-            Everything a disciplined trader needs
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-center text-[#6B7280]">
-            Built specifically for NSE &amp; BSE traders — from intraday to long-term investors.
-          </p>
+      {/* Features Section */}
+      <section id="features" aria-labelledby="features-heading" className="bg-white py-28 border-t border-gray-200/60">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2
+              id="features-heading"
+              className="text-3xl font-light tracking-tight text-[#0F172A] sm:text-5xl"
+            >
+              Everything a disciplined trader needs
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[#64748B]">
+              Built specifically for Indian stock market investors — from intraday F&amp;O traders to long-term equity investors.
+            </p>
+          </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map(({ icon: Icon, title, description }) => (
               <article
                 key={title}
-                className="rounded-2xl border border-[#E5E7EB] bg-white p-7 transition-shadow hover:shadow-lg"
+                className="group relative rounded-3xl border border-gray-200/80 bg-[#F8FAFC] p-8 transition-all duration-300 hover:bg-white hover:shadow-xl hover:-translate-y-1 hover:border-[#00E575]/50"
               >
-                <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#22C55E]/10">
-                  <Icon size={22} stroke={1.8} className="text-[#16A34A]" />
-                </span>
-                <h3 className="mb-2 font-bold text-[#1A202C]">{title}</h3>
-                <p className="text-sm leading-relaxed text-[#6B7280]">{description}</p>
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm border border-gray-200/80 group-hover:border-[#00E575]/40 transition-colors">
+                  <Icon size={24} stroke={1.8} className="text-[#0F172A]" />
+                </div>
+                <h3 className="mb-3 text-lg font-medium text-[#0F172A]">{title}</h3>
+                <p className="text-sm leading-relaxed text-[#64748B]">{description}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="why" aria-labelledby="why-heading" className="bg-[#0D1B2A] py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2">
-          <div>
-            <h2 id="why-heading" className="text-3xl font-bold text-white sm:text-4xl">
-              Why keep a trading journal?
+      {/* Why Keep a Journal Section */}
+      <section id="why" aria-labelledby="why-heading" className="bg-[#0F172A] text-white py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 grid grid-cols-1 gap-16 lg:grid-cols-12 items-center">
+          <div className="lg:col-span-6 space-y-6">
+            <h2 id="why-heading" className="text-3xl font-light tracking-tight sm:text-5xl leading-tight">
+              Why keep a <br />
+              <span className="italic text-[#00E575]">trading journal?</span>
             </h2>
-            <p className="mt-6 leading-relaxed text-[#B8C4CC]">
-              Most retail traders lose money not because of bad strategies, but because of
-              inconsistent execution and unchecked emotions. A trading journal forces you to
-              confront the truth about your trades — why you entered, why you exited, and
-              whether fear or greed was driving you.
+            <p className="text-base leading-relaxed text-slate-300">
+              Most retail traders lose money not because of bad strategies, but because of inconsistent execution and unchecked emotions. A trading journal forces you to confront the truth about your executions.
             </p>
-            <p className="mt-4 leading-relaxed text-[#B8C4CC]">
-              Professional traders at prop desks and hedge funds all keep detailed trade logs.
-              TradeJournal brings the same discipline to retail traders — in under two minutes a
-              day.
+            <p className="text-base leading-relaxed text-slate-400">
+              Professional traders at prop desks and hedge funds all keep detailed trade logs. TradeJournal brings the same institutional discipline to your personal trading routine.
             </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-8 bg-[#22C55E] px-8 text-white hover:bg-[#16A34A]"
-            >
-              <Link href="/auth/sign-up">
-                Start your journal today
-                <IconArrowRight size={16} />
+            <div className="pt-4">
+              <Link
+                href="/auth/sign-up"
+                className="inline-flex items-center gap-2 bg-[#00E575] hover:bg-[#00D66C] text-[#0F172A] font-semibold rounded-full px-8 py-3.5 shadow-lg transition-transform hover:scale-105"
+              >
+                <span>Start Your Free Journal</span>
+                <IconArrowRight size={18} />
               </Link>
-            </Button>
+            </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               {
                 icon: IconClock,
@@ -227,67 +250,59 @@ export default async function HomePage() {
             ].map(({ icon: Icon, title, text }) => (
               <div
                 key={title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6"
+                className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
               >
-                <Icon size={22} stroke={1.8} className="mb-4 text-[#22C55E]" />
-                <h3 className="mb-2 font-semibold text-white">{title}</h3>
-                <p className="text-sm leading-relaxed text-[#8A9BA8]">{text}</p>
+                <Icon size={24} stroke={1.8} className="mb-4 text-[#00E575]" />
+                <h3 className="mb-2 font-medium text-white text-base">{title}</h3>
+                <p className="text-xs leading-relaxed text-slate-400">{text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="faq" aria-labelledby="faq-heading" className="bg-[#F5F7FA] py-24">
-        <div className="mx-auto max-w-3xl px-6">
-          <h2 id="faq-heading" className="text-center text-3xl font-bold text-[#1A202C] sm:text-4xl">
-            Frequently asked questions
-          </h2>
-          <div className="mt-12 space-y-6">
+      {/* FAQ Section */}
+      <section id="faq" aria-labelledby="faq-heading" className="bg-[#F4F5F7] py-28">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="text-center mb-16">
+            <h2 id="faq-heading" className="text-3xl font-light tracking-tight text-[#0F172A] sm:text-5xl">
+              Frequently asked questions
+            </h2>
+            <p className="mt-4 text-sm text-[#64748B]">Everything you need to know about TradeJournal</p>
+          </div>
+
+          <div className="space-y-4">
             {faqs.map((faq) => (
               <div
                 key={faq.q}
-                className="rounded-2xl border border-[#E5E7EB] bg-white p-6"
+                className="rounded-2xl border border-gray-200/80 bg-white p-6 shadow-sm transition-all hover:border-[#00E575]/40"
               >
-                <h3 className="font-semibold text-[#1A202C]">{faq.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">{faq.a}</p>
+                <h3 className="font-medium text-[#0F172A] text-base">{faq.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="cta-heading" className="bg-[#0D1B2A] py-24">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 id="cta-heading" className="text-3xl font-bold text-white sm:text-4xl">
-            Start your trading journal today
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-[#B8C4CC]">
-            Join traders who track their P&amp;L, reflect on their trades, and grow as
-            disciplined investors — completely free.
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="mt-10 bg-[#22C55E] px-10 text-white hover:bg-[#16A34A]"
-          >
-            <Link href="/auth/sign-up">
-              Create your free journal
-              <IconArrowRight size={16} />
-            </Link>
-          </Button>
-        </div>
-      </section>
+      {/* Minimal Footer */}
+      <footer className="border-t border-gray-200/80 bg-white py-12">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-[#64748B]">
+          <div className="flex items-center gap-2">
+            <Image src="/icon.png" alt="Logo" width={20} height={20} className="rounded-full" />
+            <span className="font-medium text-[#0F172A]">TradeJournal</span>
+            <span>· © {new Date().getFullYear()} All rights reserved.</span>
+          </div>
 
-      <footer className="border-t border-white/10 py-10">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <p className="text-sm text-[#8A9BA8]">
-            © {new Date().getFullYear()} TradeJournal · Free trading journal for Indian stock
-            market investors
-          </p>
-          <p className="mt-2 text-xs text-[#5F7280]">
-            Built for NSE · BSE · NIFTY · Bank NIFTY · F&amp;O traders
-          </p>
+          <div className="flex items-center gap-4 font-medium text-[#0F172A]">
+            <a href="#hero" className="hover:text-[#00E575] transition">Home</a>
+            <span>·</span>
+            <a href="#features" className="hover:text-[#00E575] transition">Services</a>
+            <span>·</span>
+            <a href="#why" className="hover:text-[#00E575] transition">Works</a>
+            <span>·</span>
+            <a href="#faq" className="hover:text-[#00E575] transition">About</a>
+          </div>
         </div>
       </footer>
     </main>

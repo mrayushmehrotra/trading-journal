@@ -30,6 +30,8 @@ export async function POST(request: Request) {
   const tradesTaken = typeof body?.tradesTaken === "string" ? body.tradesTaken : null;
   const reason = typeof body?.reason === "string" ? body.reason : null;
   const mindset = typeof body?.mindset === "string" ? body.mindset : null;
+  const revengeTrading =
+    typeof body?.revengeTrading === "boolean" ? body.revengeTrading : false;
 
   if (!date || !tradesTaken) {
     return NextResponse.json(
@@ -40,7 +42,14 @@ export async function POST(request: Request) {
 
   try {
     const entry = await prisma.journalEntry.create({
-      data: { userId: session.user.id, date: new Date(date), tradesTaken, reason, mindset },
+      data: {
+        userId: session.user.id,
+        date: new Date(date),
+        tradesTaken,
+        reason,
+        mindset,
+        revengeTrading,
+      },
     });
     return NextResponse.json(entry, { status: 201 });
   } catch (error) {

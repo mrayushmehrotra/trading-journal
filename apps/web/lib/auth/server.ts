@@ -1,8 +1,20 @@
-import { createNeonAuth } from "@neondatabase/auth/next/server";
+import { auth as clerkAuth, clerkMiddleware } from "@clerk/nextjs/server";
+import type { NextMiddleware } from "next/server";
 
-export const auth = createNeonAuth({
-  baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  cookies: {
-    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-  },
-});
+type SessionUser = { id: string; name: string | null; email: string | null };
+type Session = { user: SessionUser } | null;
+type GetSessionResult = { data: Session };
+
+async function getSession(): Promise<GetSessionResult> {
+  const { userId } = await clerkAuth();
+  if (!userId) return { data: null };
+  return { data: { user: { id: userId, name: null, email: null } } };
+}
+
+export const auth: {
+  getSession: () => Promise<GetSessionResult>;
+  middleware: NextMiddleware;
+} = {
+  getSession,
+  middleware: clerkMiddleware as unknown as NextMiddleware,
+};

@@ -30,6 +30,8 @@ export async function PUT(request: Request, { params }: RouteContext) {
   const tradesTaken = typeof body?.tradesTaken === "string" ? body.tradesTaken : null;
   const reason = typeof body?.reason === "string" ? body.reason : null;
   const mindset = typeof body?.mindset === "string" ? body.mindset : null;
+  const revengeTrading =
+    typeof body?.revengeTrading === "boolean" ? body.revengeTrading : false;
 
   if (!date || !tradesTaken) {
     return NextResponse.json(
@@ -41,7 +43,7 @@ export async function PUT(request: Request, { params }: RouteContext) {
   try {
     const entry = await prisma.journalEntry.update({
       where: { id: entryId },
-      data: { date: new Date(date), tradesTaken, reason, mindset },
+      data: { date: new Date(date), tradesTaken, reason, mindset, revengeTrading },
     });
     return NextResponse.json(entry);
   } catch (error) {

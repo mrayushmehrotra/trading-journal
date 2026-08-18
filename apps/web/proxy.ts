@@ -1,15 +1,10 @@
 import { auth } from "@/lib/auth/server";
 
-export default auth.middleware({
-  loginUrl: "/auth/sign-in",
-});
+export default auth.middleware;
 
 export const config = {
   matcher: [
-    "/dashboard/:path*",
-    "/trades/:path*",
-    "/journal/:path*",
-    "/api/trades/:path*",
-    "/api/journal/:path*",
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
   ],
 };

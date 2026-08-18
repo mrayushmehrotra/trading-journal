@@ -7,8 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@workspace/ui/lib/utils"
 import QueryProvider from "@/providers/query-provider"
 import JotaiProvider from "@/providers/jotai-provider"
-import { NeonAuthUIProvider } from "@neondatabase/auth-ui"
-import { authClient } from "@/lib/auth/client"
+import { ClerkProvider } from "@clerk/nextjs"
 import { baseMetadata, companyName, siteDescription, siteUrl } from "./seo-metadata"
 
 const geistHeading = Geist({ subsets: ["latin"], variable: "--font-heading" })
@@ -101,10 +100,10 @@ export default function RootLayout({
       <body>
         <JotaiProvider>
           <QueryProvider>
-            <NeonAuthUIProvider emailOTP social={{ providers: ["google"] }} authClient={authClient}>
+            <ClerkProvider>
               <ThemeProvider>{children}</ThemeProvider>
               <Toaster position="top-center" richColors />
-            </NeonAuthUIProvider>
+            </ClerkProvider>
           </QueryProvider>
         </JotaiProvider>
       </body>

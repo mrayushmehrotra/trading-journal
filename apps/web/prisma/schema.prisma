@@ -7,6 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique @map("clerk_id")
+  email     String   @unique
+  firstName String?  @map("first_name")
+  lastName  String?  @map("last_name")
+  imageUrl  String?  @map("image_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
 model Trade {
   id        Int      @id @default(autoincrement())
   userId    String   @map("user_id")
@@ -21,14 +34,15 @@ model Trade {
 }
 
 model JournalEntry {
-  id          Int      @id @default(autoincrement())
-  userId      String   @map("user_id")
-  date        DateTime @db.Date
-  tradesTaken String   @map("trades_taken") @db.Text
-  reason      String?  @db.Text
-  mindset     String?  @db.Text
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id             Int      @id @default(autoincrement())
+  userId         String   @map("user_id")
+  date           DateTime @db.Date
+  tradesTaken    String   @map("trades_taken") @db.Text
+  reason         String?  @db.Text
+  mindset        String?  @db.Text
+  revengeTrading Boolean  @default(false) @map("revenge_trading")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
 
   @@unique([userId, date])
   @@index([userId])
