@@ -8,7 +8,13 @@ import { cn } from "@workspace/ui/lib/utils"
 import QueryProvider from "@/providers/query-provider"
 import JotaiProvider from "@/providers/jotai-provider"
 import { ClerkProvider } from "@clerk/nextjs"
-import { baseMetadata, companyName, siteDescription, siteUrl } from "./seo-metadata"
+import {
+  baseMetadata,
+  companyName,
+  siteDescription,
+  siteUrl,
+} from "./seo-metadata"
+import { Analytics } from "@vercel/analytics/next"
 
 const geistHeading = Geist({ subsets: ["latin"], variable: "--font-heading" })
 
@@ -99,6 +105,7 @@ export default function RootLayout({
       </head>
       <body>
         <JotaiProvider>
+          <Analytics />
           <QueryProvider>
             <ClerkProvider>
               <ThemeProvider>{children}</ThemeProvider>
